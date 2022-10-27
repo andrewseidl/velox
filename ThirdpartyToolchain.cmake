@@ -73,6 +73,7 @@ macro(build_folly)
   if(NOT folly_POPULATED)
     # Fetch the content using previously declared details
     FetchContent_Populate(folly)
+    execute_process(COMMAND sed -i -e "/logging\\/example/d" ${folly_SOURCE_DIR}/folly/CMakeLists.txt)
     add_subdirectory(${folly_SOURCE_DIR} ${folly_BINARY_DIR})
     # Avoid possible errors for known warnings
     target_compile_options(folly PUBLIC ${EXTRA_CXX_FLAGS})
